@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/menu', function(){
+    return view('menu');
+})->middleware(['auth','verified'])->name('menu');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -18,5 +22,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/web_service.php';
 require __DIR__.'/web_users.php';
-
+require __DIR__.'/web_departement.php';
