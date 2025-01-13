@@ -23,16 +23,16 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link href="">
+                        <x-dropdown-link href="{{route('services.index', ['departement' => 1])}}">
                             {{ __('Médecine Interne') }}
                         </x-dropdown-link>
-                        <x-dropdown-link href="">
+                        <x-dropdown-link href="{{route('services.index', ['departement' => 2])}}">
                             {{ __('Chirurgie') }}
                         </x-dropdown-link>
-                        <x-dropdown-link href="">
+                        <x-dropdown-link href="{{route('services.index', ['departement' => 3])}}">
                             {{ __('Gynécologie-Obstétrique') }}
                         </x-dropdown-link>
-                        <x-dropdown-link href="">
+                        <x-dropdown-link href="{{route('services.index', ['departement' => 4])}}">
                             {{ __('Pédiatrie') }}
                         </x-dropdown-link>
                     </x-slot>
@@ -92,16 +92,16 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-dropdown-link href="">
+                    <x-dropdown-link href="{{route('services.index', ['departement' => 1])}}">
                         {{ __('Médecine Interne') }}
                     </x-dropdown-link>
-                    <x-dropdown-link href="">
+                    <x-dropdown-link href="{{route('services.index', ['departement' => 2])}}">
                         {{ __('Chirurgie') }}
                     </x-dropdown-link>
-                    <x-dropdown-link href="">
+                    <x-dropdown-link href="{{route('services.index', ['departement' => 3])}}">
                         {{ __('Gynécologie-Obstétrique') }}
                     </x-dropdown-link>
-                    <x-dropdown-link href="">
+                    <x-dropdown-link href="{{route('services.index', ['departement' => 4])}}">
                         {{ __('Pédiatrie') }}
                     </x-dropdown-link>
                 </x-slot>
