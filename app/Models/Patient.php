@@ -18,4 +18,10 @@ class Patient extends Model
         'telephone',
         'email'
     ];
+    public function examens(){
+        return $this->hasMany(Examen::class);
+    }
+    public function hospitalisations(){
+        return $this->hasMany(Hospitalisation::class);
+    }
 }

@@ -15,4 +15,7 @@ class Room extends Model
         'capacite',
         'disponibilite'
     ];
+    public function hospitalisation(){
+        return $this->hasMany(Hospitalisation::class);
+    }
 }

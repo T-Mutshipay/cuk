@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             DepartementSeeder::class,
             GynecoObstetriqueSeeder::class,
-            ChirurgieSeeder::class
+            ChirurgieSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
