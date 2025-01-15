@@ -14,7 +14,6 @@ class ServiceController extends Controller
     public function index(Request $request,)
     {
         $departement = Departement::find($request->departement);
-        // dd($departement);
         $services = Service::where('departement_id', $request->departement)->get(); 
         return view('services.index', compact('services','departement'));
     }
