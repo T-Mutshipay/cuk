@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hospitalisation;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
@@ -21,6 +23,7 @@ class PatientController extends Controller
      */
     public function create()
     {
+        $patients_attribuer = DB::select('select patient_id from Patient_reponsable where id > 0');
         return view('patients.create');
     }
 
@@ -54,9 +57,9 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( string $id)
     {
-        $patient = Patient::findOrFail($id);
+        $patient = Patient::with(['hospitalisations','examens'])->findOrFail($id);
         return view('patients.show', compact('patient'));
     }
 
