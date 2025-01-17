@@ -21,9 +21,11 @@
                         @include('profile.partials.update-password-form')
                     </div>
                 </div>
+                @if (auth()->user()->specialite == 'informatique' || auth()->user()->specialite == 'admin')
                 <div class="py-4 max-w-xl">
                     @include('profile.partials.delete-user-form')
                 </div>
+                @endif
             </div>
         </div>
     </div>

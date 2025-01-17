@@ -18,4 +18,7 @@ class Service extends Model
     public function departement(){
         return $this->BelongsTo(Departement::class);
     }
+    public function hospitalisation(){
+        return $this->hasMany(Hospitalisation::class);
+    }
 }
