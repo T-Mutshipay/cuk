@@ -15,7 +15,7 @@ class ServiceSeeder extends Seeder
     public function run()
     {
         DB::table('services')->insert([
-            ['nom' => 'Urgences', 'departement_id' => 1],
+            ['nom' => 'Urgences - Médecine Interne ', 'departement_id' => 1],
             ['nom' => 'Soins Intensifs', 'departement_id' => 1],
             ['nom' => 'Hepato-gastro-entérologie', 'departement_id' => 1],
             ['nom' => 'Maladies infectieuses et parasitaires (MIP)', 'departement_id' => 1],

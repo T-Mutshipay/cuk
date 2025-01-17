@@ -7,9 +7,11 @@
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($services as $service)
+                <a href="{{route('hospitalisations.index',["service"=>$service->id])}}" >
                     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg text-center">
                         <p class="font-semibold dark:text-white">{{ $service->nom }}</p>
                     </div>
+                </a>
                 @endforeach
             </div>
         @endif

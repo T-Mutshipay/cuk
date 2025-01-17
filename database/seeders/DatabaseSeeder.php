@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Patient;
 use App\Models\Room;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,8 +16,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Room::factory(10)->create();
+        Patient::factory()->count(50)->create();
         $this->call([
-            DepartementSeeder::class,
+            // DepartementSeeder::class,
             ServiceSeeder::class,
             DepartementSeeder::class,
             GynecoObstetriqueSeeder::class,

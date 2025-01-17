@@ -14,7 +14,7 @@ class PediatrieSeeder extends Seeder
     public function run(): void
     {
         DB::table('services')->insert([
-            ['nom' => 'Urgences', 'departement_id' => 4], 
+            ['nom' => 'Urgences - Pédiatrique', 'departement_id' => 4], 
             ['nom' => 'Soins Intensifs', 'departement_id' => 4], 
             ['nom' => 'Néonatalogie Unité A', 'departement_id' => 4], 
             ['nom' => 'Néonatalogie Unité B', 'departement_id' => 4], 

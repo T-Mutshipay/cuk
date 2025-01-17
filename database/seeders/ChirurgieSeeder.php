@@ -14,7 +14,7 @@ class ChirurgieSeeder extends Seeder
     public function run(): void
     {
         DB::table('services')->insert([
-            ['nom' => 'Urgences', 'departement_id' => 2], 
+            ['nom' => 'Urgences - Chirurgie', 'departement_id' => 2], 
             ['nom' => 'Soins Intensifs', 'departement_id' => 2], 
             ['nom' => 'Urologie', 'departement_id' => 2], 
             ['nom' => 'Thoracique', 'departement_id' => 2], 
