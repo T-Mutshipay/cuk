@@ -18,15 +18,19 @@ class RoomController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'capacite' => 'required|integer|min:1',
-            'disponibilite' => 'required|boolean',
+            // 'disponibilite' => 'required|boolean',
         ]);
 
-        Room::create($request->all());
-        return redirect()->route('rooms.index')->with('success', 'Chambre ajoutée avec succès.');
+        try {
+            Room::create($validatedData);
+            return redirect()->route('rooms.index')->with('success', 'Chambre ajoutée avec succès.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Une erreur est survenue lors de l\'ajout de la chambre.'])->withInput();
+        }
     }
     public function show(Room $room)
     {
