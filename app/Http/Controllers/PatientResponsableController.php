@@ -30,7 +30,7 @@ class PatientResponsableController extends Controller
 
         PatientResponsable::create($request->all());
 
-        return redirect()->route('patient-responsables.index')->with('success', 'Responsable ajouté avec succès.');
+        return redirect()->route('patient_responsables.index')->with('success', 'Responsable ajouté avec succès.');
     }
     public function show($id)
     {
@@ -55,13 +55,13 @@ class PatientResponsableController extends Controller
         $patientResponsable = PatientResponsable::findOrFail($id);
         $patientResponsable->update($request->all());
 
-        return redirect()->route('patient-responsables.index')->with('success', 'Responsable mis à jour avec succès.');
+        return redirect()->route('patient_responsables.index')->with('success', 'Responsable mis à jour avec succès.');
     }
     public function destroy($id)
     {
         $patientResponsable = PatientResponsable::findOrFail($id);
         $patientResponsable->delete();
 
-        return redirect()->route('patient-responsables.index')->with('success', 'Responsable supprimé avec succès.');
+        return redirect()->route('patient_responsables.index')->with('success', 'Responsable supprimé avec succès.');
     }
 }
