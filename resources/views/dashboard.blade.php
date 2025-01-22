@@ -1,77 +1,85 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-
-    <div class="bg-gray-100">
-        <div class="min-h-screen flex flex-col">
-        <main class="container mx-auto px-4 py-6">
-          <!-- Grille des sections -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Section : Liste des patients -->
-            <div class="bg-white shadow rounded-lg p-6">
-              <h2 class="text-xl font-bold mb-4">Patients dont vous êtes responsable</h2>
-              <ul class="space-y-3">
-                <li class="p-4 bg-gray-50 rounded shadow-sm flex justify-between items-center">
-                  <span>Patient 1</span>
-                  <span class="text-sm text-gray-500">ID : 12345</span>
-                </li>
-                <li class="p-4 bg-gray-50 rounded shadow-sm flex justify-between items-center">
-                  <span>Patient 2</span>
-                  <span class="text-sm text-gray-500">ID : 67890</span>
-                </li>
-                <li class="p-4 bg-gray-50 rounded shadow-sm flex justify-between items-center">
-                  <span>Patient 3</span>
-                  <span class="text-sm text-gray-500">ID : 11223</span>
-                </li>
-              </ul>
-              <div class="mt-4 text-right">
-                <a href="#" class="text-blue-600 text-sm font-medium">Voir tous les patients</a>
+  <x-slot name="header">
+      <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+          {{ __('Dashboard') }}
+      </h2>
+  </x-slot>
+  <div class="p-4">
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+          <div class="grid grid-cols-3 gap-4 mb-4">
+              <div class="flex items-center justify-center h-24 rounded bg-red-500 dark:bg-slate-800">
+                  <p class="text-white dark:text-gray-500">
+                      Nombre de Patients : {{ $patientsCount }}
+                  </p>
               </div>
-            </div>
-    
-            <!-- Section : Hospitalisations par services -->
-            <div class="bg-white shadow rounded-lg p-6">
-              <h2 class="text-xl font-bold mb-4">Hospitalisations par service</h2>
-              <div>
-                <ul class="space-y-3">
-                  <li class="flex justify-between">
-                    <span>Cardiologie</span>
-                    <span class="font-bold text-blue-600">15</span>
-                  </li>
-                  <li class="flex justify-between">
-                    <span>Neurologie</span>
-                    <span class="font-bold text-blue-600">10</span>
-                  </li>
-                  <li class="flex justify-between">
-                    <span>Orthopédie</span>
-                    <span class="font-bold text-blue-600">7</span>
-                  </li>
-                </ul>
+              <div class="flex items-center justify-center h-24 rounded bg-red-500 dark:bg-gray-800">
+                  <p class="text-white dark:text-gray-500">
+                      Hospitalisés : {{ $hospitalisationsCount }}
+                  </p>
               </div>
-            </div>
-    
-            <!-- Section : Hospitalisations par direction -->
-            <div class="bg-white shadow rounded-lg p-6">
-              <h2 class="text-xl font-bold mb-4">Hospitalisations par direction</h2>
-              <div class="space-y-4">
-                <div class="flex justify-between items-center">
-                  <span>Direction Nord</span>
-                  <div class="text-sm bg-blue-100 text-blue-600 rounded-full px-4 py-1">25 patients</div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span>Direction Sud</span>
-                  <div class="text-sm bg-blue-100 text-blue-600 rounded-full px-4 py-1">18 patients</div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span>Direction Est</span>
-                  <div class="text-sm bg-blue-100 text-blue-600 rounded-full px-4 py-1">10 patients</div>
-                </div>
+              <div class="flex items-center justify-center h-24 rounded bg-red-500 dark:bg-gray-800">
+                  <p class="text-white dark:text-gray-500">
+                      Non Hospitalisés : {{ $nonHospitalisesCount }}
+                  </p>
               </div>
-            </div>
           </div>
-        </main>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+              <div class="flex items-center justify-center rounded bg-gray-50 h-56 dark:bg-gray-800">
+                  <canvas id="barChart" class="w-full h-full"></canvas>
+              </div>
+              <div class="flex items-center justify-center rounded bg-gray-50 h-56 dark:bg-gray-800">
+                  <canvas id="pieChart" class="w-full h-full"></canvas>
+              </div>
+          </div>
+          <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+              <div>
+                  <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                      Les nouveaux patients :
+                  </h3>
+                  <ul>
+                      @forelse($newPatients as $newPatient)
+                          <li class="text-gray-700 dark:text-gray-300">
+                              {{ $newPatient->name }}
+                          </li>
+                      @empty
+                          <li class="text-gray-700 dark:text-gray-300">Aucun nouveau patient.</li>
+                      @endforelse
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const barChartCtx = document.getElementById('barChart').getContext('2d');
+          const pieChartCtx = document.getElementById('pieChart').getContext('2d');
+  
+          new Chart(barChartCtx, {
+              type: 'bar',
+              data: {
+                  labels: ['Hospitalisés', 'Non Hospitalisés'],
+                  datasets: [{
+                      label: 'Patients',
+                      data: [{{ $hospitalisationsCount ?? 0 }}, {{ $nonHospitalisesCount ?? 0 }}],
+                      backgroundColor: ['#f87171', '#60a5fa'],
+                  }]
+              }
+          });
+  
+          new Chart(pieChartCtx, {
+              type: 'pie',
+              data: {
+                  labels: ['Hospitalisés', 'Non Hospitalisés'],
+                  datasets: [{
+                      label: 'Patients',
+                      data: [{{ $hospitalisationsCount ?? 0 }}, {{ $nonHospitalisesCount ?? 0 }}],
+                      backgroundColor: ['#f87171', '#60a5fa'],
+                  }]
+              }
+          });
+      });
+  </script>
+  
 </x-app-layout>
