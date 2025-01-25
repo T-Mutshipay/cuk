@@ -14,9 +14,9 @@ class DashboardController extends Controller{
 {
     $user = Auth::user();
     $patient = PatientResponsable::where('user_id', $user->id)->first();
-    $patient_id = $patient->patient_id;
 
-    if ($patient) {
+    if ($patient && $patient->patient_id) {
+        $patient_id = $patient->patient_id;
         $hospitalisations = Hospitalisation::where('patient_id', $patient_id)->get();
         $hospitalisationsCount = $hospitalisations->count();
         $nonHospitalisesCount = Examen::where('patient_id', $patient_id)->count() - $hospitalisationsCount;
