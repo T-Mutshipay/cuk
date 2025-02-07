@@ -9,9 +9,15 @@ class Consultation extends Model
     protected $fillable = [
         'patient_id',
         'user_id',
-        'date_consultation',
+        'motif_consultation',
+        'poids',
+        'taille',
+        'temperature',
+        'tension',
+        'pouls',
         'diagnostic',
-        'traitement',
+        'date_consultation',
+        'heure_consultation',
     ];
 
     public function patient()

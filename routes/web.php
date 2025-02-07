@@ -26,8 +26,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 require __DIR__.'/web_room.php';
 require __DIR__.'/web_users.php';
-require __DiR__.'/web_patient.php';
 require __DIR__.'/web_service.php';
+require __DIR__.'/web_facture.php';
+require __DiR__.'/web_patient.php';
+require __DIR__.'/web_consultation.php';
 require __DIR__.'/web_departement.php';
 require __DIR__.'/web_hospitalisation.php';
 require __DIR__.'/web_patient_responsable.php';

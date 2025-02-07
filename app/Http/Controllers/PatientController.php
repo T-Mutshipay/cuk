@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hospitalisation;
+use App\Models\Consultation;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -59,8 +60,9 @@ class PatientController extends Controller
      */
     public function show( string $id)
     {
+        $consultations = Consultation::where('patient_id', $id)->get();
         $patient = Patient::with(['hospitalisations','examens'])->findOrFail($id);
-        return view('patients.show', compact('patient'));
+        return view('patients.show', compact('patient', 'consultations'));
     }
 
     /**
