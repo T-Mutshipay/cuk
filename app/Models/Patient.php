@@ -24,4 +24,7 @@ class Patient extends Model
     public function hospitalisations(){
         return $this->hasMany(Hospitalisation::class);
     }
+    public function consultation(){
+        return $this->hasMany(Consultation::class);
+    }
 }

@@ -50,4 +50,7 @@ class User extends Authenticatable
     public function patientResponsables(){
         return $this->hasMany(PatientResponsable::class);
     }
+    public function consultations(){
+        return $this->hasMany(Consultation::class);
+    }
 }
