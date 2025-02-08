@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             GynecoObstetriqueSeeder::class,
             ChirurgieSeeder::class,
             UserSeeder::class,
+            PediatrieSeeder::class,
         ]);
     }
 }
